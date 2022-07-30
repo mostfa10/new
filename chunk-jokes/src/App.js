@@ -71,21 +71,6 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-  const likeJoke = (id) => {
-    if (likedJokes.find((j) => j.id === id)) return;
-    const likedJoke = jokes.find((j) => j.id === id);
-    setLikedJokes([likedJoke, ...likedJokes]);
-  };
-
-  const unlikeJoke = (id) => {
-    const newLikedJokes = likedJokes.filter((j) => j.id !== id);
-    setLikedJokes(newLikedJokes);
-  };
-
-  const changeTab = (event, value) => {
-    setCurrentTab(value);
-  };
-
   const addMoreJokes = () => {
     setLoading(true);
     setTimeout(() => {
@@ -119,21 +104,6 @@ function App() {
       observeElement(bottomJokeEl);
     }
   }, [jokesToShow]);
-
-  const toggleCategory = (event) => {
-    const category = event.target.name;
-
-    if (filterCategories.includes(category)) {
-      // If found then remove
-      const filterCategoriesCopy = [...filterCategories];
-      const categoryIndex = filterCategoriesCopy.indexOf(category);
-      filterCategoriesCopy.splice(categoryIndex, 1);
-      setFilterCategories(filterCategoriesCopy);
-    } else {
-      // Else add it
-      setFilterCategories([...filterCategories, category]);
-    }
-  };
 
   const categoryMatch = (jokeCategories) => {
     for (let i = 0; i < jokeCategories.length; i++) {

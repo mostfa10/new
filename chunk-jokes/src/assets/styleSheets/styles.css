@@ -858,6 +858,7 @@ p {
   width: 100%;
   margin: 10px auto;
   align-items: stretch;
+  height: 250px;
 }
 
 .card-header {
@@ -876,6 +877,7 @@ p {
   text-align: justify;
   text-justify: inter-word;
   margin-left: 4em;
+  overflow-y: auto;
   margin-right: 4em;
 }
 .card-footer {
@@ -1035,4 +1037,8 @@ li {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
 }
