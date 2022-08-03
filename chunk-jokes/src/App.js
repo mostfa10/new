@@ -26,8 +26,9 @@ function App() {
   const [categories, setCategories] = useState([]);
   const [filterCategories, setFilterCategories] = useState([]);
 
-  const [likedJokes, setLikedJokes] = useState([]);
-  const [currentTab, setCurrentTab] = useState(0);
+  var [GridDisplay,setGridDisplay] = useState(true);
+  var [currentJokeIndex,setCurrentJokeIndex] = useState(0);
+
 
   const [searchInput, setSearchInput] = useState('all');
 
@@ -124,8 +125,8 @@ function App() {
         <NavBar />
       </div>
       <div className="main">
-        <BannerBlock ResultSearchJokes={ResultSearchJokes} searchInput={searchInput} fetchJokesSearchResults={fetchJokesSearchResults} setSearchInput={setSearchInput} getSearchResults={getSearchResults}/>
-        <MainContentBlock jokesToShow={jokesToShow} loading={loading} Spinner={Spinner} categoryMatch={categoryMatch} setSearchInput={setSearchInput} fetchAndSetJokes={fetchAndSetJokes}/>
+        <BannerBlock ResultSearchJokes={ResultSearchJokes} searchInput={searchInput} fetchJokesSearchResults={fetchJokesSearchResults} setSearchInput={setSearchInput} getSearchResults={getSearchResults} setGridDisplay={setGridDisplay} setCurrentJokeIndex={setCurrentJokeIndex} setJokesToShow={setJokesToShow} />
+        <MainContentBlock jokesToShow={jokesToShow} loading={loading} Spinner={Spinner} categoryMatch={categoryMatch} setSearchInput={setSearchInput} fetchAndSetJokes={fetchAndSetJokes} GridDisplay={GridDisplay} setGridDisplay={setGridDisplay} currentJokeIndex={currentJokeIndex} setCurrentJokeIndex={setCurrentJokeIndex} jokes={jokes} />
       </div>
       <div className="footer">
         <Footer />

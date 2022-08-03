@@ -11,13 +11,16 @@ export class BannerBlock extends React.Component {
       this.handleChange = this.handleChange.bind(this);
       this.handleSubmit = this.handleSubmit.bind(this);
       this.resetSearch = this.resetSearch.bind(this)
+      this.showJoke = this.showJoke.bind(this)
     }
   
     handleChange(event) {
-        this.props.fetchJokesSearchResults(event.target.value)
-        this.props.setSearchInput(event.target.value)
         this.setState({value: event.target.value});
-        this.showResults = true;
+        this.props.setSearchInput(event.target.value)
+        if(event.target.value.length > 3){
+            this.props.fetchJokesSearchResults(event.target.value)
+            this.showResults = true;
+        }
     }
   
     handleSubmit(event) {     
@@ -28,6 +31,16 @@ export class BannerBlock extends React.Component {
         this.showResults = false;
         this.props.setSearchInput('all');
         this.setState({value: ''});
+    }
+
+    showJoke(index){
+        if(this.searchResults.length > 1){
+            this.props.setJokesToShow(this.searchResults)
+        }else
+        {
+            this.props.setCurrentJokeIndex(index)
+            this.props.setGridDisplay(false)
+        }
     }
 
   render () {
@@ -47,14 +60,14 @@ export class BannerBlock extends React.Component {
                 <input type="text" className="search-input" value={this.state.value} onChange={this.handleChange} onKeyUp={this.handleSubmit} onBlur={this.resetSearch} placeholder="How can we make you laugh today ?" />
                 </label>
             </form>
-            { (this.showResults == true) ?
+            { (this.showResults === true) ?
                         (
                             <div className="search-result-container">
                             <div className="row">
                                 { 
                                     this.searchResults?.map((res, index) => {
                                         res.icon = AllIcon;
-                                        return (<div className="search-result"  key={'res'+index.toString()}>
+                                        return (<div className="search-result"  key={'res'+index.toString()} onClick={this.showJoke(index)}>
                                             <img src={res.icon} height='20px' className="px-1" alt="header icon"></img>
                                             <span>{res.categories[0] ?? 'Random'}: {res.value.substring(0, 15) + '...'}</span>
                                         </div>
